@@ -11,7 +11,7 @@ namespace HardcoreWarnings
     internal class LowOxygenAlert_Update_Patch
 	{
 		[HarmonyPrefix]
-        public static bool Prefix(LowOxygenAlert __instance, ref Utils.ScalarMonitor ___secondsMonitor, ref Player ___player, ref float ___lastOxygenCapacity)
+        public static bool Prefix(LowOxygenAlert __instance, ref Utils.ScalarMonitor ___secondsMonitor, Player ___player, ref float ___lastOxygenCapacity)
         {
 			___secondsMonitor.Update(___player.GetOxygenAvailable());
 			float oxygenCapacity = ___player.GetOxygenCapacity();
@@ -24,8 +24,7 @@ namespace HardcoreWarnings
 					{
 						Subtitles.main.Add(alert.notification.text);
 						alert.soundSFX.Play();
-						___lastOxygenCapacity = oxygenCapacity;
-						return false;
+						break;
 					}
 				}
 			}

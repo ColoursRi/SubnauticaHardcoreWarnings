@@ -11,10 +11,9 @@ namespace HardcoreWarnings
 	internal class HintSwimToSurface_ShouldShowWarning_Patch
 	{
 		[HarmonyPrefix]
-		public static bool Prefix(HintSwimToSurface __instance, bool __result, int ___numShown)
+		public static bool Prefix(HintSwimToSurface __instance, ref bool __result, int ___numShown)
 		{
 			Player main = Player.main;
-
 			if (main == null)
 			{
 				__result = false;
