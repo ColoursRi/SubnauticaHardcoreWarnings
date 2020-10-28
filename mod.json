@@ -2,7 +2,7 @@
     "Id": "HardcoreWarnings",
     "DisplayName": "O2 Warnings in Hardcore",
     "Author": "Ri",
-    "Version": "0.1",
+    "Version": "0.1.1",
     "Requires": [],
     "Enable": true,
     "AssemblyName": "HardcoreWarnings.dll",
