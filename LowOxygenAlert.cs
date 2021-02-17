@@ -20,9 +20,9 @@ namespace HardcoreWarnings
 				for (int i = __instance.alertList.Count - 1; i >= 0; i--)
 				{
 					LowOxygenAlert.Alert alert = __instance.alertList[i];
-					if (oxygenCapacity >= alert.minO2Capacity && ___secondsMonitor.JustDroppedBelow((float)alert.oxygenTriggerSeconds) && Ocean.main.GetDepthOf(Utils.GetLocalPlayer()) > alert.minDepth && (___player.IsSwimming() || (___player.GetMode() == Player.Mode.LockedPiloting && !___player.GetVehicle().IsPowered()) || (___player.IsInSub() && !___player.CanBreathe())))
+					if (oxygenCapacity >= alert.minO2Capacity && ___secondsMonitor.JustDroppedBelow((float)alert.oxygenTriggerSeconds) && Ocean.GetDepthOf(Utils.GetLocalPlayer()) > alert.minDepth && (___player.IsSwimming() || (___player.GetMode() == Player.Mode.LockedPiloting && !___player.GetVehicle().IsPowered()) || (___player.IsInSub() && !___player.CanBreathe())))
 					{
-						Subtitles.main.Add(alert.notification.text);
+						Subtitles.Add(alert.notification.text);
 						alert.soundSFX.Play();
 						break;
 					}

@@ -24,14 +24,13 @@ namespace HardcoreWarnings
 				__result = false;
 				return false;
 			}
-			Ocean main2 = Ocean.main;
-			if (main2 == null)
+			if (Ocean.main == null)
 			{
 				__result = false;
 				return false;
 			}
 			float oxygenAvailable = main.GetOxygenAvailable();
-			float depthOf = main2.GetDepthOf(main.gameObject);
+			float depthOf = Ocean.GetDepthOf(main.gameObject);
 			Vehicle vehicle = main.GetVehicle();
 			__result = (oxygenAvailable < __instance.oxygenThreshold && depthOf > 0f && main.IsSwimming()) || (vehicle != null && !vehicle.IsPowered());
 			return false;
