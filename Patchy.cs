@@ -1,10 +1,14 @@
 ﻿using HarmonyLib;
 using System.Reflection;
+using QModManager.API;
+using QModManager.API.ModLoading;
 
 namespace HardcoreWarnings
 {
-    public class Patchy
-    {   
+    [QModCore]
+    public static class Patchy
+    {
+        [QModPatch]
         public static void Patch()
         {
             var harmony = new Harmony("com.ri.subnautica.HardcoreWarnings");

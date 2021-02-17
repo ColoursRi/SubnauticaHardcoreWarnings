@@ -1,11 +1,11 @@
 {
-    "Id": "HardcoreWarnings",
-    "DisplayName": "O2 Warnings in Hardcore",
-    "Author": "Ri",
-    "Version": "0.1.1",
-    "Requires": [],
-    "Enable": true,
-    "AssemblyName": "HardcoreWarnings.dll",
-    "EntryMethod": "HardcoreWarnings.Patchy.Patch",
-    "Config": {}
+  "Id": "HardcoreWarnings",
+  "DisplayName": "O2 Warnings in Hardcore",
+  "Author": "Ri",
+  "Version": "0.1.1",
+  "Requires": [],
+  "Enable": true,
+  "Game": "BelowZero",
+  "AssemblyName": "HardcoreWarnings.dll",
+  "Config": {}
 }
