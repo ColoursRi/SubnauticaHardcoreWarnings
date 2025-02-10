@@ -1,36 +1,32 @@
 ﻿using HarmonyLib;
-using UnityEngine;
 
-
-
-namespace HardcoreWarnings
+namespace O2AlertsInHardcore
 {
     [HarmonyPatch(typeof(LowOxygenAlert))]
     [HarmonyPatch("Update")]
-
     internal class LowOxygenAlert_Update_Patch
 	{
 		[HarmonyPrefix]
-        public static bool Prefix(LowOxygenAlert __instance, ref Utils.ScalarMonitor ___secondsMonitor, Player ___player, ref float ___lastOxygenCapacity)
+        public static bool Prefix(LowOxygenAlert __instance)
         {
-			___secondsMonitor.Update(___player.GetOxygenAvailable());
-			float oxygenCapacity = ___player.GetOxygenCapacity();
-			if (Utils.NearlyEqual(oxygenCapacity, ___lastOxygenCapacity, 1.401298E-45f) || oxygenCapacity < ___lastOxygenCapacity)
-			{
-				for (int i = __instance.alertList.Count - 1; i >= 0; i--)
-				{
-					LowOxygenAlert.Alert alert = __instance.alertList[i];
-					if (oxygenCapacity >= alert.minO2Capacity && ___secondsMonitor.JustDroppedBelow((float)alert.oxygenTriggerSeconds) && Ocean.main.GetDepthOf(Utils.GetLocalPlayer()) > alert.minDepth && (___player.IsSwimming() || (___player.GetMode() == Player.Mode.LockedPiloting && !___player.GetVehicle().IsPowered()) || (___player.IsInSub() && !___player.CanBreathe())))
-					{
-						Subtitles.main.Add(alert.notification.text);
-						alert.soundSFX.Play();
-						break;
-					}
-				}
-			}
-			___lastOxygenCapacity = oxygenCapacity;
-			return false;
-		}
+	        __instance.secondsMonitor.Update(__instance.player.GetOxygenAvailable());
+	        float oxygenCapacity = __instance.player.GetOxygenCapacity();
+	        if (Utils.NearlyEqual(oxygenCapacity, __instance.lastOxygenCapacity, 1E-45f) || oxygenCapacity < __instance.lastOxygenCapacity)
+	        {
+		        for (int i = __instance.alertList.Count - 1; i >= 0; i--)
+		        {
+			        LowOxygenAlert.Alert alert = __instance.alertList[i];
+			        if (oxygenCapacity >= alert.minO2Capacity && __instance.secondsMonitor.JustDroppedBelow((float)alert.oxygenTriggerSeconds) && Ocean.GetDepthOf(Utils.GetLocalPlayer()) > alert.minDepth && (__instance.player.IsSwimming() || (__instance.player.GetMode() == Player.Mode.LockedPiloting && !__instance.player.IsInsidePoweredVehicle()) || (__instance.player.IsInSub() && !__instance.player.CanBreathe())))
+			        {
+				        Subtitles.Add(alert.notification.text, null);
+				        alert.soundSFX.Play();
+				        break;
+			        }
+		        }
+	        }
+	        __instance.lastOxygenCapacity = oxygenCapacity;
+	        return true;
+        }
 
     }
 }
